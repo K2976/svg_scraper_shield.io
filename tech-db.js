@@ -35,6 +35,7 @@ const TECH_DB = [
   { name: "Azure", slug: "microsoftazure", color: "0078D4" },
   { name: "Firebase", slug: "firebase", color: "DD2C00" },
   { name: "Vercel", slug: "vercel", color: "000000" },
+  { name: "Render", slug: "render", color: "46E3B7" },
   { name: "Netlify", slug: "netlify", color: "00C7B7" },
   { name: "Git", slug: "git", color: "F05032" },
   { name: "Linux", slug: "linux", color: "FCC624" },
@@ -100,6 +101,7 @@ const TECH_DB = [
   { name: "Gemini", slug: "googlegemini", color: "8E75B2" },
   { name: "OpenAI", slug: "openai", color: "412991" },
   { name: "Claude", slug: "anthropic", color: "191919" },
+  { name: "Groq", slug: "groq", color: "F55036" },
   { name: "Spotify", slug: "spotify", color: "1DB954" },
   { name: "Twitch", slug: "twitch", color: "9146FF" },
   { name: "YouTube", slug: "youtube", color: "FF0000" },
@@ -133,6 +135,11 @@ const TECH_DB = [
   { name: "Remote Config", slug: "firebase", color: "DD2C00" },
   { name: "hypothesis", slug: "python", color: "3776AB" },
   { name: "pre-commit", slug: "precommit", color: "FABB00" },
+  { name: "Groq", slug: "groq", color: "F55036" },
+  { name: "YouTube Music API", slug: "youtubemusic", color: "FF0000" },
+  { name: "REST API", slug: "restapi", color: "005571" },
+  { name: "Neon", slug: "neon", color: "00E599" },
+  { name: "Playwright", slug: "playwright", color: "2EAD33" },
 ];
 
 const POPULAR_TECHS = [
