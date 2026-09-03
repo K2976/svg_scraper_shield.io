@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shields SVG Downloader</title>
+  <meta name="description" content="Download exact SVG badges from Shields.io for your presentations. Type a technology name, preview the badge, and download the SVG.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <main>
+    <header class="hero">
+      <div class="logo-mark">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <h1>Shields SVG Downloader</h1>
+      <p class="subtitle">Type a technology name → preview the badge → download the exact SVG from Shields.io</p>
+    </header>
+
+    <!-- Search -->
+    <section class="search-section">
+      <div class="search-box" id="search-box">
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search technologies… (e.g. React, Docker, Python)"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <kbd class="search-hint" id="search-hint">/</kbd>
+        <div class="suggestions-dropdown" id="suggestions-dropdown"></div>
+      </div>
+    </section>
+
+    <!-- Quick picks -->
+    <section class="quick-picks">
+      <p class="quick-picks-label">Popular</p>
+      <div class="chips" id="chips"></div>
+    </section>
+
+    <!-- Customization -->
+    <section class="customization glass-card" id="customization" style="display:none;">
+      <h2>Customize Badge</h2>
+      <div class="form-grid">
+        <div class="field">
+          <label for="field-label">Label</label>
+          <input type="text" id="field-label" placeholder="React">
+        </div>
+        <div class="field">
+          <label for="field-color">Badge Color</label>
+          <div class="color-input-wrap">
+            <span class="hash">#</span>
+            <input type="text" id="field-color" placeholder="61DAFB" maxlength="6">
+            <input type="color" id="field-color-picker" class="color-picker" value="#61DAFB">
+          </div>
+        </div>
+        <div class="field">
+          <label for="field-logo">Logo Slug</label>
+          <input type="text" id="field-logo" placeholder="react">
+        </div>
+        <div class="field">
+          <label for="field-logoColor">Logo Color</label>
+          <input type="text" id="field-logoColor" placeholder="white">
+        </div>
+        <div class="field">
+          <label for="field-style">Style</label>
+          <select id="field-style">
+            <option value="for-the-badge">For the Badge</option>
+            <option value="flat">Flat</option>
+            <option value="flat-square">Flat Square</option>
+            <option value="plastic">Plastic</option>
+            <option value="social">Social</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="field-labelColor">Label Color (optional)</label>
+          <input type="text" id="field-labelColor" placeholder="auto">
+        </div>
+      </div>
+    </section>
+
+    <!-- Preview -->
+    <section class="preview-section glass-card" id="preview-section" style="display:none;">
+      <h2>Preview</h2>
+      <div class="preview-area" id="preview-area">
+        <div class="preview-placeholder">Select a technology to preview</div>
+      </div>
+      <div class="url-display" id="url-display"></div>
+      <div class="preview-actions">
+        <button class="btn btn-primary" id="btn-download">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download SVG
+        </button>
+        <button class="btn btn-secondary" id="btn-copy-url">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+          </svg>
+          Copy URL
+        </button>
+      </div>
+    </section>
+
+    <!-- Bulk Mode -->
+    <section class="bulk-section glass-card">
+      <h2>Bulk Download</h2>
+      <p class="bulk-desc">Select multiple technologies and download all badges at once.</p>
+      <div class="bulk-selected" id="bulk-selected"></div>
+      <div class="bulk-actions" id="bulk-actions" style="display:none;">
+        <button class="btn btn-primary" id="btn-bulk-download">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download All (<span id="bulk-count">0</span> badges)
+        </button>
+        <button class="btn btn-ghost" id="btn-bulk-clear">Clear All</button>
+      </div>
+    </section>
+
+    <!-- Toast -->
+    <div class="toast-container" id="toast-container"></div>
+  </main>
+
+  <footer>
+    <p>Badges served by <a href="https://shields.io" target="_blank" rel="noopener">Shields.io</a> · Logos from <a href="https://simpleicons.org" target="_blank" rel="noopener">Simple Icons</a></p>
+  </footer>
+
+  <script src="tech-db.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
