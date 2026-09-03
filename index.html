@@ -90,6 +90,10 @@
           <label for="field-labelColor">Label Color (optional)</label>
           <input type="text" id="field-labelColor" placeholder="auto">
         </div>
+        <div class="field" style="grid-column: 1 / -1; display: flex; align-items: center; gap: 8px;">
+          <input type="checkbox" id="field-sanitize" checked style="width: auto; margin: 0;">
+          <label for="field-sanitize" style="margin: 0; cursor: pointer;">Sanitize for Canva (Vectorize Logos)</label>
+        </div>
       </div>
     </section>
 
@@ -141,6 +145,7 @@
   </footer>
 
   <script src="tech-db.js"></script>
+  <script src="sanitizer.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

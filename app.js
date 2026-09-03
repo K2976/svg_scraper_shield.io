@@ -31,6 +31,7 @@
   const fieldLogoColor  = document.getElementById("field-logoColor");
   const fieldStyle      = document.getElementById("field-style");
   const fieldLabelColor = document.getElementById("field-labelColor");
+  const fieldSanitize   = document.getElementById("field-sanitize");
 
   // ── State ─────────────────────────────────────
   let currentTech = null;         // selected tech from DB or custom
@@ -351,11 +352,26 @@
         return false;
       }
 
-      const svg = await resp.text();
+      let svg = await resp.text();
 
       if (!isValidSvg(svg)) {
         toast("Response is not valid SVG", "error");
         return false;
+      }
+
+      // Apply Canva Sanitization if enabled
+      if (fieldSanitize && fieldSanitize.checked) {
+        try {
+          if (typeof sanitizeSvgForCanva === "function") {
+            svg = sanitizeSvgForCanva(svg);
+          } else {
+            console.warn("sanitizeSvgForCanva is not defined. Skipping sanitization.");
+          }
+        } catch (err) {
+          toast(`Sanitization failed, saving raw SVG. Error: ${err.message}`, "warning");
+          console.error("Sanitization error:", err);
+          // We continue and save the raw SVG so it doesn't completely fail
+        }
       }
 
       // Trigger browser download
